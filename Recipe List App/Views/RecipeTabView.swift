@@ -8,17 +8,25 @@
 import SwiftUI
 
 struct RecipeTabView: View {
+    @State var tabIndex = 2
+    // @State variable communicates with $tabIndex, where $ stands for binding
+    // This is to know which tab we are in
+    
+    // The Text field has a similar property
+    
     var body: some View {
         
-        TabView {
+        TabView (selection: $tabIndex) {
             Text("Featured View")
             
                 .tabItem {
                     VStack {
                         Image(systemName: "star.fill")
-                        Text("Featured")
+                        Text(String(tabIndex.self) + " is acive")
                     }
                 }
+                .tag(1)
+            // tag allows us to show the specified tab
             
             RecipeListView()
                 .tabItem {
@@ -29,6 +37,7 @@ struct RecipeTabView: View {
                         
                     }
                 }
+                .tag(2)
             
         }
     }
