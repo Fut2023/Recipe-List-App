@@ -25,7 +25,8 @@ struct RecipeFeaturedView: View {
                 
                 TabView {
                     // Loop through each recipe
-                    ForEach (0..<model.recipes.count) {index in
+                    ForEach (0..<model.recipes.count, id: \.self) {index in
+                        // Here , id: \.self because: When you use a range in a ForEach without it, it is read initially and never updated, so if you add/remove items from your array (viewModel.recipes in this case), you can run into an index out of range error that will crash your app.
                         
                         // Show only featured
                         if model.recipes[index].featured {
